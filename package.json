@@ -1,0 +1,20 @@
+{
+  "name": "trakt-history",
+  "version": "0.0.1",
+  "main": "index.js",
+  "repository": "https://github.com/KasperZutterman/trakt-history",
+  "author": "Kasper Zutterman <kasperzutterman1999@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^10.0.0",
+    "trakt.tv": "^8.1.1"
+  },
+  "scripts": {
+    "start": "yarn run build && node ./lib/index.js",
+    "build": "tsc"
+  },
+  "devDependencies": {
+    "@types/node": "^16.11.6",
+    "typescript": "^4.4.4"
+  }
+}
