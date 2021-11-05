@@ -17,24 +17,21 @@ export default class Fetcher {
         this.trakt = new Trakt(options);
     }
 
-    public async fetchPage(username: string, page = 1): Promise<any> {
+    public async fetchPage(page = 1): Promise<any> {
         const response = this.trakt.users.history({
-            username: username,
+            username: process.env.TRAKT_USERNAME,
             page: page,
             limit: '1000',
         })
         return response;
     }
 
-    public async fetchHistory() {
-        let username: string = 'kasper-zutterman'
-        let res = await this.fetchPage(username);
+    public async fetchHistory(): Promise<Array<object>> {
+        let res = await this.fetchPage();
         let history: Array<object> = res.data;
         
         while (res.pagination.page < res.pagination['page-count']) {
-            res = await this.fetchPage(username, parseInt(res.pagination.page) + 1);
-            // let data: Array<object> = res.data;
-            // history = history.concat(data);
+            res = await this.fetchPage(parseInt(res.pagination.page) + 1);
             history = history.concat(res.data);
             // console.log(res.pagination.page, res.pagination['page-count']);
         }
@@ -43,8 +40,7 @@ export default class Fetcher {
 
         console.log(history.length);
         console.log(history.slice(0, 10));
-        // let size = res.pagination['item-count'];
-        // console.log(size);
-        // console.log(res.data.slice(0, 10).reverse());
+
+        return history;
     }
 }

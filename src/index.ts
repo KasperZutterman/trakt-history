@@ -4,7 +4,7 @@ require('dotenv').config();
 const run = async (): Promise<void> => {
   const fetcher = new Fetcher();
 
-  await fetcher.fetchHistory();
+  let history = await fetcher.fetchHistory();
 }
 
 run().catch(error => {
